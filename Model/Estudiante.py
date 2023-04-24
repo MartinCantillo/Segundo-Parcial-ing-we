@@ -11,6 +11,9 @@ class estudiante(bd.Model):
         self.codigoE = codigoE
         self.nombre =nombre
         self.contraseña = contraseña
+    def __init__(self, codigoE):
+        self.codigoE = codigoE
+    
 
 
 with app.app_context():

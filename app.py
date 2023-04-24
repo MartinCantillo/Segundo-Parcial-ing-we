@@ -25,15 +25,26 @@ def registrarEstudiante():
     bd.session.commit()
     return "guardado"
 
+@app.route("/eliminar", methods=['POST'])
+def eliminarEstudinte():    
+    id = request.json['codigoE'] 
+    usuario = estudiante.query.get(id)    
+    bd.session.delete(usuario)
+    bd.session.commit()     
+    return jsonify(estudiante_schema.dump(usuario))
 
-@app.route("/loggin", methods=['POST'])
-def loggin():
-    usuario = request.json['usuario']
+
+@app.route("/categoria", methods=['POST'])
+def SaveCategory():
+    codigo = request.json['codigo']
+    nombre = request.json['nombre']
+    nombreCat = request.json['nombreCat']
     contraseña = request.json['contraseña']
-    newuser = loggin(usuario, contraseña)
+    newuser = Categoria(codigo, nombre, nombreCat,  contraseña)
     bd.session.add(newuser)
     bd.session.commit()
     return "guardado"
 
+
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0',port=9566)
+    app.run(debug=True, host='0.0.0.0', port=9566)
