@@ -7,13 +7,11 @@ class estudiante(bd.Model):
     contraseña = bd.Column(bd.String(50))
 
 
-    def __init__(self, codigoE,nombre,contraseña):
-        self.codigoE = codigoE
+    def __init__(self,codigoE,nombre,contraseña):
+        self.codigoE =codigoE
         self.nombre =nombre
         self.contraseña = contraseña
-    def __init__(self, codigoE):
-        self.codigoE = codigoE
-    
+   
 
 
 with app.app_context():

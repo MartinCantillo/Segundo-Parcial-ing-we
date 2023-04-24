@@ -20,18 +20,32 @@ def registrarEstudiante():
     codigoE = request.json['codigoE']
     nombre = request.json['nombre']
     contraseña = request.json['contraseña']
-    newuser = estudiante(codigoE, nombre, contraseña)
+    newuser = estudiante( codigoE,nombre, contraseña)
     bd.session.add(newuser)
     bd.session.commit()
     return "guardado"
 
+
 @app.route("/eliminar", methods=['POST'])
-def eliminarEstudinte():    
-    id = request.json['codigoE'] 
-    usuario = estudiante.query.get(id)    
+def eliminarEstudinte():
+    id = request.json['codigoE']
+    usuario = estudiante.query.get(id)
     bd.session.delete(usuario)
-    bd.session.commit()     
+    bd.session.commit()
     return jsonify(estudiante_schema.dump(usuario))
+
+
+@app.route("/actualizar", methods=['POST'])
+def actualizaruser():
+    id = request.json['codigoE']
+    nombre = request.json['nombre']
+    contraseña = request.json['contraseña']
+    estudiante1 = estudiante.query.get(id)
+    estudiante1.codigoE = id
+    estudiante1.nombre = nombre
+    estudiante1.contraseña = contraseña
+    bd.session.commit()
+    return "actualización exitosa"
 
 
 @app.route("/categoria", methods=['POST'])
