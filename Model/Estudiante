@@ -1,9 +1,8 @@
 from config.bd import bd, app, ma
 
 class estudiante(bd.Model):
-    __tablename__ ='loggin'
-    id = bd.Column(bd.Integer, primary_key = True)
-    usuario = bd.Column(bd.String(50))
+    __tablename__ ='Estudiante'
+    usuario = bd.Column(bd.Integer, primary_key = True)
     contraseña = bd.Column(bd.String(50))
     entrada = bd.Column(bd.String(50))
     salida = bd.Column(bd.String(50))
@@ -13,15 +12,10 @@ class estudiante(bd.Model):
         self.namusuarioetak = usuario
         self.contraseña = contraseña
 
-    def __init__(self, usuario,contraseña,entrada,salidad):
-        self.namusuarioetak = usuario
-        self.contraseña = contraseña
-        self.entrada= entrada
-        self.salida=salidad
 
 with app.app_context():
     bd.create_all()
 
 class estudianteSchema(ma.Schema):
     class Meta:
-        fields =('id', 'usuario', 'contraseña','entrada','salidad')
+        fields =( 'usuario', 'contraseña')
