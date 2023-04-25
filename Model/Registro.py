@@ -7,15 +7,15 @@ class registro(bd.Model):
     salida = bd.Column(bd.DateTime())
     estado = bd.Column(bd.String(50))
     idEstudiante_fk = bd.Column(bd.Integer, bd.ForeignKey('tblEstudiante.codigoE'))
-    idProfesor_fk = bd.Column(bd.Integer, bd.ForeignKey('tblcategoria.codigo'))
+    idCategoria_fk = bd.Column(bd.Integer, bd.ForeignKey('tblcategoria.codigo'))
 
 #sobrecarga de constructores
 #registro entrada
-    def __init__(self, entrada,estado,idEstudiante_fk,idProfesor_fk):
+    def __init__(self, entrada,estado,idEstudiante_fk,idCategoria_fk):
         self.entrada = entrada
         self.estado = estado
         self.idEstudiante_fk=idEstudiante_fk
-        self.idProfesor_fk=idProfesor_fk
+        self.idCategoria_fk=idCategoria_fk
  
     #entrada
     def __init__(self, entrada,salida,estado,idEstudiante_fk):
@@ -34,4 +34,4 @@ with app.app_context():
 
 class RegistroSchema(ma.Schema):
     class Meta:
-        fields =( 'entrada', 'salidad','estado','idEstudiante_fk','idProfesor_fk')
+        fields =( 'entrada', 'salidad','estado','idEstudiante_fk','idCategoria_fk')

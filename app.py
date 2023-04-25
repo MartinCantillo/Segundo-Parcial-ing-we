@@ -92,5 +92,36 @@ def RegisterSalida():
    bd.session.commit()
    return "guardado"
 
+@app.route("/cat", methods=['POST'])
+def consultarCategoria():
+   # codigoR = request.json['codigoR']
+   idCategoria_fk = request.json['idCategoria_fk']
+   bd.session.query(registro).filter(
+       
+   ).update(
+        {
+        registro.idCategoria_fk:idCategoria_fk,
+         
+        }
+   )  
+   bd.session.commit()
+   return "guardado"
+
+@app.route('/trestablas',methods=['GET'])
+def consultar():
+    results = bd.session.query(estudiante, Categoria, registro). \
+    select_from(estudiante).join(Categoria).join(registro).all()
+    dato={}   
+    i=0
+    for users, taks, category in results:
+        i+=1
+        dato[i] = {
+        'Nombre':users.fullname,
+		'tarea':taks.nametak,
+		'categoria':category.namecategory,                     
+        }       
+        print(users.fullname, taks.nametak, category.namecategory)
+    return jsonify(dato)
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=9566)
