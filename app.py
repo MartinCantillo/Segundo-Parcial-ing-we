@@ -4,6 +4,7 @@ from config.bd import app, bd
 from Model.Estudiante import estudiante, estudianteSchema
 from Model.Categoria import Categoria, CategoriaSchema
 from Model.Registro import registro, RegistroSchema
+import datetime
 
 estudiante_schema = estudianteSchema()
 estudiantes_schema = estudianteSchema(many=True)
@@ -36,7 +37,7 @@ def eliminarEstudinte():
 
 
 @app.route("/actualizar", methods=['POST'])
-def actualizaruser():
+def UpdateStudent():
     id = request.json['codigoE']
     nombre = request.json['nombre']
     contraseña = request.json['contraseña']
@@ -58,6 +59,20 @@ def SaveCategory():
     bd.session.add(newuser)
     bd.session.commit()
     return "guardado"
+
+@app.route("/registro", methods=['POST'])
+def RegisterEntrada():
+   # codigoR = request.json['codigoR']
+   entrada =datetime.datetime.now()
+   #salida =datetime.datetime.now()
+   #entrada = request.json['entrada']
+   #salida = request.json['salida']
+   estado = request.json['estado']
+   idEstudiante = request.json['idEstudiante_fk']
+   newuser = registro( entrada, estado, idEstudiante)
+   bd.session.add(newuser)
+   bd.session.commit()
+   return "guardado"
 
 
 if __name__ == '__main__':
