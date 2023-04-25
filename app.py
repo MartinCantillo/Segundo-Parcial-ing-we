@@ -64,16 +64,33 @@ def SaveCategory():
 def RegisterEntrada():
    # codigoR = request.json['codigoR']
    entrada =datetime.datetime.now()
-   #salida =datetime.datetime.now()
+   salida =datetime.datetime.now()
    #entrada = request.json['entrada']
    #salida = request.json['salida']
    estado = request.json['estado']
    idEstudiante = request.json['idEstudiante_fk']
-   newuser = registro( entrada, estado, idEstudiante)
+   newuser = registro( entrada,salida, estado, idEstudiante)
    bd.session.add(newuser)
    bd.session.commit()
    return "guardado"
 
+@app.route("/salida", methods=['POST'])
+def RegisterSalida():
+   # codigoR = request.json['codigoR']
+   salida =datetime.datetime.now()
+   idEstudiante = request.json['idEstudiante_fk']
+   estado = request.json['estado']
+   bd.session.query(registro).filter(
+       registro.idEstudiante_fk==idEstudiante
+   ).update(
+        {
+        registro.salida:salida,
+        registro.estado : estado
+         
+        }
+   )  
+   bd.session.commit()
+   return "guardado"
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=9566)

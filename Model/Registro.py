@@ -11,25 +11,21 @@ class registro(bd.Model):
 
 #sobrecarga de constructores
 #registro entrada
-    def __init__(self, entrada,salidad,estado,idEstudiante_fk,idProfesor_fk):
+    def __init__(self, entrada,estado,idEstudiante_fk,idProfesor_fk):
         self.entrada = entrada
-        self.salidad = salidad
         self.estado = estado
         self.idEstudiante_fk=idEstudiante_fk
         self.idProfesor_fk=idProfesor_fk
-
+ 
+    #entrada
     def __init__(self, entrada,salida,estado,idEstudiante_fk):
         self.entrada = entrada
-        self.salida = salida
+        self.salida =salida
         self.estado = estado
         self.idEstudiante_fk=idEstudiante_fk
 
-     #Registrar Salida   
-    def __init__(self,salida,estado,idEstudiante_fk):
-        self.salida = salida
-        self.estado = estado
-        self.idEstudiante_fk=idEstudiante_fk    
-        
+       
+       
 
         
 
