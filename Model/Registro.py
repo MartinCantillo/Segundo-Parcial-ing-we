@@ -1,3 +1,6 @@
+
+from flask import render_template
+from datetime import date, datetime, timedelta
 from config.bd import bd, app, ma
 
 class registro(bd.Model):
